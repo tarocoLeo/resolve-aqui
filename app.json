@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "resolve-aqui",
+    "slug": "resolve-aqui",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

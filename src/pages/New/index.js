@@ -1,105 +1,110 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, Button, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native'
+import { View, Text, Button, StyleSheet, TextInput, TouchableOpacity, Image, Keyboard } from 'react-native'
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { useForm, Controller } from 'react-hook-form';
-
 export default function New() {
-    const { control, handleSubmit, formState: { errors} } = useForm({})
+    
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [categories, setCategories] = useState(['Emprego', 'Família', 'Amor']);
 
-    function handleSignIn(data){
-        console.log(data);
+    const post = () => {
+        alert('publicado')
     }
-
     return (
-        <View style={styles.tela}>
+        <View style={styles.forms}>
             <View style={styles.container}>
                 <Text style={styles.title}>Título</Text>
-
-                <Controller
-                    control={control}
-                    name="titulo"
-                    render={({ field: {onChange, onBlur, value} }) =>(
-                        <TextInput 
-                            style={styles.input}
-                            onChangeText={onChange}
-                            onBlur={onBlur}
-                            value={value}
-                        />
-                    )}
-                />
-                <Text style={styles.subtitle}>digite o assunto do tema abordado</Text>
+                    <TextInput style={styles.titleInput} onChangeText={text=>setTitle(text)}/>
+                    <Text style={styles.subDescription}>digite o assunto do tema abordado</Text>
+                    <Text style={styles.subDescription}>_______________________________________________________________</Text>
             </View>
 
             <View style={styles.container}>
                 <Text style={styles.title}>Descrição</Text>
-
-                <Controller
-                    control={control}
-                    name="titulo"
-                    render={({ field: {onChange, onBlur, value} }) =>(
-                        <TextInput 
-                            style={styles.input}
-                            onChangeText={onChange}
-                            onBlur={onBlur}
-                            value={value}
-                        />
-                    )}
+                <TextInput 
+                    style={styles.descriptionInput}
+                    multiline={true}
+                    returnKeyType='done'
+                    onSubmitEditing={Keyboard.dismiss}
+                    onChangeText={text=>setDescription(text)}
                 />
-                <Text style={styles.subtitle}>sinta-se à vontade para descrever a situação</Text>
+                <Text style={styles.subDescription}>sinta-se à vontade para descrever a situação</Text>
+                <Text style={styles.subDescription}>_______________________________________________________________</Text>
             </View>
 
-            <View style={styles.container}>
-                <Text style={styles.title}>Categoria</Text>
-
-                <Controller
-                    control={control}
-                    name="titulo"
-                    render={({ field: {onChange, onBlur, value} }) =>(
-                        <TextInput 
-                            style={styles.input}
-                            onChangeText={onChange}
-                            onBlur={onBlur}
-                            value={value}
-                        />
-                    )}
-                />
-                <Text style={styles.subtitle}>selecione uma categoria relacionada</Text>
+            <View style={styles.positionBottom}>               
+                <View style={styles.buttom}>
+                    <TouchableOpacity onPress={()=>post()}>
+                        <View style={{alignItems:'center'}}>
+                            <Image style={{width:20,height:20, marginBottom:10}} source={require('../../../assets/images/ok_button.png')} />
+                            <Text  style={{color: 'gray'}}>Salvar</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </View>
-        
-            <TouchableOpacity style={styles.button} onPress={handleSubmit(handleSignIn)}>
-                    <Text  style={styles.buttonText}>Salvar</Text>
-            </TouchableOpacity>
-        
-        </View>
+        </View>     
     );
 }
 
 const styles = StyleSheet.create({
-    tela:{
+    forms:{
         padding: 15,
         flex:1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        justifyContent: 'top'
     },
     container:{
         padding: 15,
-        flex:1,
+        flex:-1,
         justifyContent: 'top',
-        alignItems: 'center'
     },
     title:{
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'bold',
-        padding: 10
+        paddingBottom: 10
     },
-    input:{
-        height: 50,
-        backgroundCollor: '#000',
-        borderColor: '#000',
-        borderRadius: 30
+    titleInput:{
+        width:'100%',
+        height:40,
+        backgroundColor:'white',
+        borderRadius:10,
+        padding:10,
+        borderColor: 'gray',
+        borderWidth: 1,
+        marginBottom:10,
     },
-    buttonText:{
-        justifyContent: 'bottom'
-    }
+    descriptionInput:{
+        width:'100%',
+        height:100,
+        backgroundColor:'white',
+        borderRadius:10,
+        padding:10,
+        marginBottom:10,
+        borderColor: 'gray',
+        borderWidth: 1,
+    },
+    subDescription:{
+        fontSize: 11,
+        color: 'gray',
+        paddingBottom: 10,
+        borderBottomWidth: 1
+    },
+    buttom:{
+        width:40,
+        height: 40
+    },
+    positionBottom:{
+        marginLeft: '85%'
+    },
+    titleInput:{
+        width:'100%',
+        height:40,
+        backgroundColor:'white',
+        borderRadius:10,
+        padding:10,
+        borderColor: 'gray',
+        borderWidth: 1,
+        marginBottom:10,
+    },
 })

@@ -3,10 +3,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Home from './pages/Home';
-import Interactions from './pages/Interactions';
 import New from './pages/New'
 import Profile from './pages/Profile';
 import Nickname from './pages/Nickname';
+import Register from './pages/Register';
+import Conflict from './pages/Conflict';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,15 +27,7 @@ export default function Routes(){
                 iconName = focused ? 'ios-list-box' : 'ios-list';
               }
 
-              if (route.name === 'Interações') {
-                iconName = focused
-                  ? 'chatbox'
-                  : 'chatbox';
-              } else if (route.name === 'Settings') {
-                iconName = focused ? 'ios-list-box' : 'ios-list';
-              }
-
-              if (route.name === 'Novo') {
+              if (route.name === 'Adicionar Conflito') {
                 iconName = focused
                   ? 'create'
                   : 'create';
@@ -53,7 +46,7 @@ export default function Routes(){
               // You can return any component that you like here!
               return <Ionicons name={iconName} size={size} color={color} />;
             },
-            tabBarActiveTintColor: '#1C63F5',
+            tabBarActiveTintColor: '#116FF6',
             tabBarInactiveTintColor: 'gray',
           })}
         >
@@ -67,18 +60,9 @@ export default function Routes(){
             }}
             />
             
-            <Tab.Screen 
-            name="Interações" 
-            component={Interactions}
-            screenOptions={{
-                tabBarIcon: ({ size, color}) => (
-                    <Entypo name="chat" size={size} color={color} />
-                )
-            }}
-            />
             
             <Tab.Screen 
-            name="Novo" 
+            name="Adicionar Conflito" 
             component={New} 
             screenOptions={{
                 tabBarIcon: ({ size, color}) => (
@@ -100,6 +84,26 @@ export default function Routes(){
             <Tab.Screen 
             name="Nickname" 
             component={Nickname} 
+            screenOptions={{
+                tabBarIcon: ({ size, color}) => (
+                    <Feather name="user" size={size} color={color} />
+                )
+            }}
+            />
+
+            <Tab.Screen 
+            name="Register" 
+            component={Register} 
+            screenOptions={{
+                tabBarIcon: ({ size, color}) => (
+                    <Feather name="user" size={size} color={color} />
+                )
+            }}
+            />
+
+            <Tab.Screen 
+            name="Conflito" 
+            component={Conflict} 
             screenOptions={{
                 tabBarIcon: ({ size, color}) => (
                     <Feather name="user" size={size} color={color} />
